@@ -49,6 +49,12 @@ export class StaffService {
         let dateJoin = new Date(staff?.dateJoin);
         let now = new Date();
         let yearsWorked = now.getFullYear() - dateJoin.getFullYear(); // not supported mounth and days
+        if (yearsWorked != 0 && now.getMonth() < dateJoin.getMonth()) {
+            yearsWorked -= 1;
+        }else if (yearsWorked != 0 && now.getMonth() === dateJoin.getMonth() && now.getDate() < dateJoin.getDate()) {
+            yearsWorked -= 1;
+        }
+        // console.log(yearsWorked);
         let percent : number;
         switch (staff.role) {
             case ('Employee'):
